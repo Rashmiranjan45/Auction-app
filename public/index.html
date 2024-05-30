@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auction</title>
+</head>
+
+<body>
+    <h1>AUCTION APPLICATION....</h1>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io("ws://localhost:9000");
+
+        socket.on("connect", () => {
+            console.log("Connected to server with ID:", socket.id);
+        });
+        socket.on("update", (data) => {
+            console.log(data)
+            alert(`New bid placed on your item: ${data.message}`);
+        })
+        socket.on("notify", (data) => {
+            console.log(data)
+        })
+        socket.on("connect_error", (error) => {
+            console.error("Connection error:", error);
+        });
+    </script>
+</body>
+
+</html>
